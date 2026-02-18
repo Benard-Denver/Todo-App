@@ -7,7 +7,7 @@ interface Todo {
   status: "Complete" | "In Progress" | "Not Started";
 }
 
-const todos: Todo[] = [
+let todos: Todo[] = [
   {
     title: "go home",
     description: "go home",
@@ -22,13 +22,30 @@ const todos: Todo[] = [
   },
 ];
 
+//create todo
+function addTodo(todo: Todo) {
+  todos.push(todo);
+}
+
+//delete todo
+function deleteTodo(index: number) {
+  todos.splice(index, 1);
+}
+
+//update todo
+function updateTodo(index: number, updatedTodo: Todo) {
+  todos[index] = updatedTodo;
+}
+
 function DrawTodos() {
   const todoSection = document.getElementById("todos");
+  let todoList = "";
   if (todoSection === null) {
     return;
   }
   todos.forEach((todo) => {
-    todoSection.innerHTML += `<p>${todo.title}</p>`;
+    todoList += `<p>${todo.title}</p>`;
   });
+  todoSection.innerHTML = todoList;
 }
 DrawTodos();

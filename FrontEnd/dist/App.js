@@ -1,5 +1,5 @@
 console.log("Hello World");
-const todos = [
+let todos = [
     {
         title: "go home",
         description: "go home",
@@ -13,14 +13,28 @@ const todos = [
         status: "In Progress",
     },
 ];
+//create todo
+function addTodo(todo) {
+    todos.push(todo);
+}
+//delete todo
+function deleteTodo(index) {
+    todos.splice(index, 1);
+}
+//update todo
+function updateTodo(index, updatedTodo) {
+    todos[index] = updatedTodo;
+}
 function DrawTodos() {
     const todoSection = document.getElementById("todos");
+    let todoList = "";
     if (todoSection === null) {
         return;
     }
     todos.forEach((todo) => {
-        todoSection.innerHTML += `<p>${todo.title}</p>`;
+        todoList += `<p>${todo.title}</p>`;
     });
+    todoSection.innerHTML = todoList;
 }
 DrawTodos();
 export {};
