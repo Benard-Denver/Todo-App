@@ -1,13 +1,9 @@
+import type { Todo } from "./Views/TodoCard";
+import { Home } from "./Views/Home";
+
 console.log("Hello World");
 
-interface Todo {
-  title: string;
-  description: string;
-  dueDate: Date;
-  status: "Complete" | "In Progress" | "Not Started";
-}
-
-const todos: Todo[] = [
+export const todos: Todo[] = [
   {
     title: "go home",
     description: "go home",
@@ -22,13 +18,19 @@ const todos: Todo[] = [
   },
 ];
 
-function DrawTodos() {
-  const todoSection = document.getElementById("todos");
-  if (todoSection === null) {
-    return;
-  }
-  todos.forEach((todo) => {
-    todoSection.innerHTML += `<p>${todo.title}</p>`;
-  });
-}
-DrawTodos();
+// function DrawTodos() {
+//   const todoSection = document.getElementById("todos");
+//   let todoList = "";
+//   if (todoSection === null) {
+//     return;
+//   }
+//   todos.forEach((todo) => {
+//     todoList += `<p>${todo.title}</p>`;
+//   });
+
+//   todoSection.innerHTML = todoList;
+// }
+// DrawTodos();
+
+const app = document.getElementById("app-todo")!;
+app.appendChild(Home());

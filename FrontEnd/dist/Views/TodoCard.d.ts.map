@@ -1,0 +1,1 @@
+{"version":3,"file":"TodoCard.d.ts","sourceRoot":"","sources":["../../src/Views/TodoCard.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,IAAI;IACnB,KAAK,EAAE,MAAM,CAAC;IACd,WAAW,EAAE,MAAM,CAAC;IACpB,OAAO,EAAE,IAAI,CAAC;IACd,MAAM,EAAE,UAAU,GAAG,aAAa,GAAG,aAAa,CAAC;CACpD;AAED,wBAAgB,QAAQ,CAAC,IAAI,EAAE,IAAI,GAAG,WAAW,CAyBhD"}

@@ -1,5 +1,6 @@
+import { Home } from "./Views/Home.js";
 console.log("Hello World");
-const todos = [
+export const todos = [
     {
         title: "go home",
         description: "go home",
@@ -13,15 +14,18 @@ const todos = [
         status: "In Progress",
     },
 ];
-function DrawTodos() {
-    const todoSection = document.getElementById("todos");
-    if (todoSection === null) {
-        return;
-    }
-    todos.forEach((todo) => {
-        todoSection.innerHTML += `<p>${todo.title}</p>`;
-    });
-}
-DrawTodos();
-export {};
+// function DrawTodos() {
+//   const todoSection = document.getElementById("todos");
+//   let todoList = "";
+//   if (todoSection === null) {
+//     return;
+//   }
+//   todos.forEach((todo) => {
+//     todoList += `<p>${todo.title}</p>`;
+//   });
+//   todoSection.innerHTML = todoList;
+// }
+// DrawTodos();
+const app = document.getElementById("app-todo");
+app.appendChild(Home());
 //# sourceMappingURL=App.js.map
