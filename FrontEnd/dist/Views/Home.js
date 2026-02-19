@@ -1,13 +1,15 @@
 import { TodoCard } from "./TodoCard.js";
 import { todos } from "../App.js";
 export function Home() {
+    const mainDiv = document.createElement("div");
+    mainDiv.className = "main-container";
     // div container
     const container = document.createElement("div");
     container.className = "home-container";
     //Title
     const title = document.createElement("h1");
     title.textContent = "TODO APP";
-    container.appendChild(title);
+    mainDiv.appendChild(title);
     //searchbar
     const searchBar = document.createElement("input");
     searchBar.placeholder = "Search";
@@ -20,6 +22,7 @@ export function Home() {
         cardsWrapper.appendChild(TodoCard(todo));
     });
     container.appendChild(cardsWrapper);
-    return container;
+    mainDiv.appendChild(container);
+    return mainDiv;
 }
 //# sourceMappingURL=Home.js.map

@@ -2,10 +2,16 @@ import { Home } from "./Views/Home.js";
 console.log("Hello World");
 export const todos = [
     {
-        title: "go home",
-        description: "go home",
+        title: "Go home",
+        description: "Go home and get enough rest. Come back tomorrow with fresh energy and get the job done. You really work worjed hard today",
         dueDate: new Date(),
         status: "Complete",
+    },
+    {
+        title: "Listen to music",
+        description: "Take a break and listen to some good music.",
+        dueDate: new Date(),
+        status: "Not Started",
     },
     {
         title: "Read a book",

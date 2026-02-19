@@ -7,6 +7,8 @@ body {
     background: #ddd;
     padding: 20px;
     border-radius: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 .cards-wrapper {
@@ -16,18 +18,66 @@ body {
 }
 
 .todo-card {
+    text-align: left;
     width: 200px;
+    height: max-content;
     background: #f3f3f3;
     border-radius: 10px;
-    padding: 10px;
+    padding: 0 5px 5px 5px;
     position: relative;
 }
 
 .delete-btn {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    width: 20px;
+    height: 20px;
+    top: -7px;
+    right: -7px;
     border: none;
-    background: #ffb3b3;
+    background: #fa7070;
     border-radius: 50%;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+.search-input {
+    width: 1200px;
+    height: 30px;
+    border-radius: 30px;
+    border: gray;
+    padding: 5px;
+}
+
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-footer {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.due-date {
+   /* background-color: rgb(9, 235, 36); */
+    font-size: small;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.todo-status {
+  /*  outline: 2px solid #09eb24;*/
+    padding: 3px;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: bold;
 }
