@@ -1,5 +1,5 @@
-import { TodoCard } from "./TodoCard";
-import { todos } from "../App";
+import { TodoCard } from "./TodoCard.js";
+import { todos } from "../App.js";
 
 export function Home(): HTMLElement {
   const mainDiv = document.createElement("div");

@@ -1,6 +1,43 @@
 import { Home } from "./Views/Home.js";
+import { TodoService } from "./Services/TodoServices.js";
 console.log("Hello World");
-export const todos = [
+export const todos1 = [
+    {
+        title: "Go home",
+        description: "Go home and get enough rest. Come back tomorrow with fresh energy and get the job done. You really work worjed hard today",
+        dueDate: new Date(),
+        status: "Complete",
+    },
+    {
+        title: "Listen to music",
+        description: "Take a break and listen to some good music.",
+        dueDate: new Date(),
+        status: "Not Started",
+    },
+    {
+        title: "Read a book",
+        description: "React basics",
+        dueDate: new Date(),
+        status: "In Progress",
+    },
+    {
+        title: "Go home",
+        description: "Go home and get enough rest. Come back tomorrow with fresh energy and get the job done. You really work worjed hard today",
+        dueDate: new Date(),
+        status: "Complete",
+    },
+    {
+        title: "Listen to music",
+        description: "Take a break and listen to some good music.",
+        dueDate: new Date(),
+        status: "Not Started",
+    },
+    {
+        title: "Read a book",
+        description: "React basics",
+        dueDate: new Date(),
+        status: "In Progress",
+    },
     {
         title: "Go home",
         description: "Go home and get enough rest. Come back tomorrow with fresh energy and get the job done. You really work worjed hard today",
@@ -20,18 +57,8 @@ export const todos = [
         status: "In Progress",
     },
 ];
-// function DrawTodos() {
-//   const todoSection = document.getElementById("todos");
-//   let todoList = "";
-//   if (todoSection === null) {
-//     return;
-//   }
-//   todos.forEach((todo) => {
-//     todoList += `<p>${todo.title}</p>`;
-//   });
-//   todoSection.innerHTML = todoList;
-// }
-// DrawTodos();
+let todoService = new TodoService();
+export let todos = await todoService.get();
 const app = document.getElementById("app-todo");
 app.appendChild(Home());
 //# sourceMappingURL=App.js.map

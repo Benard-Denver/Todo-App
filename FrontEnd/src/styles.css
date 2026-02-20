@@ -4,17 +4,25 @@ body {
 }
 
 .home-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     background: #ddd;
     padding: 20px;
     border-radius: 12px;
     justify-content: center;
     align-items: center;
+    max-width: 1300px;
+    min-height: max-content ;
 }
 
 .cards-wrapper {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 39px;
     margin-top: 20px;
+    padding-left: 45px;
 }
 
 .todo-card {
@@ -67,7 +75,7 @@ body {
 }
 
 .due-date {
-   /* background-color: rgb(9, 235, 36); */
+    /* background-color: rgb(9, 235, 36); */
     font-size: small;
     font-weight: bold;
     padding: 5px;
@@ -75,9 +83,20 @@ body {
 }
 
 .todo-status {
-  /*  outline: 2px solid #09eb24;*/
+    /*  outline: 2px solid #09eb24;*/
     padding: 3px;
     border-radius: 5px;
     font-size: small;
     font-weight: bold;
+}
+
+.top-line{
+    position: relative;
+    top: -15px;
+    opacity: 50%;
+}
+.bottom-line {
+    position: relative;
+    top: 15px;
+    opacity: 50%;
 }

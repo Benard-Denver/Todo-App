@@ -5,29 +5,33 @@ export function TodoCard(todo) {
     //todo title
     const title = document.createElement("h3");
     title.textContent = todo.title;
+    const topDivider = document.createElement("hr");
+    topDivider.className = "top-line";
     //todo description
     const details = document.createElement("p");
     details.textContent = todo.description;
     // todo status
     const todoFooter = document.createElement("span");
     todoFooter.className = "todo-footer";
+    const bottomDivider = document.createElement("hr");
+    bottomDivider.className = "bottom-line";
     const dueDate = document.createElement("p");
     const status = document.createElement("p");
     status.className = "todo-status";
     status.textContent = todo.status;
     //todo due date
     dueDate.className = "due-date";
-    dueDate.textContent = todo.dueDate.toLocaleDateString();
+    dueDate.textContent = new Date(todo.dueDate).toLocaleDateString();
     if (status.textContent === "Complete") {
-        status.style.backgroundColor = "#09eb24";
+        status.style.outline = "3px solid #09eb24";
         dueDate.style.backgroundColor = "#09eb24";
     }
     if (status.textContent.includes("Started")) {
-        status.style.outline = "#2f05d7";
-        dueDate.style.backgroundColor = "#2f05d7";
+        status.style.outline = "3px solid #159ae7";
+        dueDate.style.backgroundColor = "#159ae7";
     }
     if (status.textContent === "In Progress") {
-        status.style.backgroundColor = "#eba009";
+        status.style.outline = "3px solid #eba009";
         dueDate.style.backgroundColor = "#eba009";
     }
     todoFooter.appendChild(status);
@@ -39,7 +43,15 @@ export function TodoCard(todo) {
     deleteBtn.addEventListener("click", () => {
         card.remove();
     });
-    card.append(title, details, todoFooter, deleteBtn);
+    deleteBtn.addEventListener("mouseover", () => {
+        deleteBtn.style.backgroundColor = "red";
+        deleteBtn.style.color = "white";
+    });
+    deleteBtn.addEventListener("mouseout", () => {
+        deleteBtn.style.backgroundColor = "#fa7070";
+        deleteBtn.style.color = "black";
+    });
+    card.append(title, topDivider, details, bottomDivider, todoFooter, deleteBtn);
     return card;
 }
 //# sourceMappingURL=TodoCard.js.map
