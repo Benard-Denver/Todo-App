@@ -4,6 +4,12 @@ import { TodoService } from "./Services/TodoServices.js";
 
 console.log("Hello World");
 
+export let todoService: TodoService = new TodoService();
+export let todos = await todoService.get();
+
+const app = document.getElementById("app-todo")!;
+app.appendChild(Home());
+
 export const todos1: Todo[] = [
   {
     title: "Go home",
@@ -63,10 +69,3 @@ export const todos1: Todo[] = [
     status: "In Progress",
   },
 ];
-
-let todoService: TodoService = new TodoService();
-export let todos = await todoService.get();
-
-
-const app = document.getElementById("app-todo")!;
-app.appendChild(Home());

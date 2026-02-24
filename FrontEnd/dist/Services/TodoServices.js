@@ -7,5 +7,15 @@ export class TodoService {
         });
         return getTodos;
     }
+    async create(todo) {
+        const response = await fetch(this.localHost + "/todos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(todo),
+        });
+        return response.json();
+    }
 }
 //# sourceMappingURL=TodoServices.js.map

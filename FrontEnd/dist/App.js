@@ -57,7 +57,7 @@ export const todos1 = [
         status: "In Progress",
     },
 ];
-let todoService = new TodoService();
+export let todoService = new TodoService();
 export let todos = await todoService.get();
 const app = document.getElementById("app-todo");
 app.appendChild(Home());

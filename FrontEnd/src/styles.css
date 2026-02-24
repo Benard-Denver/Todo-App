@@ -13,13 +13,14 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 1300px;
-    min-height: max-content ;
+    min-height: max-content;
 }
 
 .cards-wrapper {
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    min-width: 0;
     gap: 39px;
     margin-top: 20px;
     padding-left: 45px;
@@ -90,13 +91,112 @@ body {
     font-weight: bold;
 }
 
-.top-line{
+.top-line {
     position: relative;
     top: -15px;
     opacity: 50%;
 }
+
 .bottom-line {
     position: relative;
     top: 15px;
     opacity: 50%;
+}
+
+.page-container {
+    display: flex;
+}
+
+
+/*for sidebar*/
+.sidebar {
+    display: flex;
+    background-color: #e8d6b0;
+    padding: 20px 0;
+    flex-direction: column;
+    gap: 10px;
+    width: 50px;
+    align-items: center;
+}
+
+button {
+    background-color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+img {
+    height: 20px;
+    width: 20px;
+}
+
+button:active {
+    background-color: rgb(247, 166, 44);
+}
+
+.create-dialog {
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-title {
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    outline: none;
+}
+
+.todo-description {
+    height: 80px;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    outline: none;
+}
+
+.cancel-btn {
+    display: flex;
+    text-align: center;
+    background-color: rgb(215, 5, 5);
+    color: white;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+.dialog-footer {
+    display: flex;
+    gap: 150px;
+    padding-left: 8px;
+}
+
+.due-date {
+    border: none;
+    background-color: #fcc24d;
+    border-radius: 10px;
+    font-weight: bold;
+    outline: none;
+}
+
+.dialog-create-btn {
+    text-align: center;
+    background-color: green;
+    width: 100px;
+    border-radius: 10px;
+    color: white;
 }

@@ -1,9 +1,14 @@
 import { TodoCard } from "./TodoCard.js";
 import { todos } from "../App.js";
+import { TodoSiderbar } from "./Sidebar.js";
 
 export function Home(): HTMLElement {
   const mainDiv = document.createElement("div");
   mainDiv.className = "main-container";
+
+  //div that contains sidebar and the container
+  const pageContainer = document.createElement("div");
+  pageContainer.className = "page-container";
   // div container
   const container = document.createElement("div");
   container.className = "home-container";
@@ -23,6 +28,8 @@ export function Home(): HTMLElement {
     cardsWrapper.appendChild(TodoCard(todo));
   });
   container.appendChild(cardsWrapper);
-  mainDiv.appendChild(container);
+  pageContainer.appendChild(TodoSiderbar());
+  pageContainer.appendChild(container);
+  mainDiv.appendChild(pageContainer);
   return mainDiv;
 }
