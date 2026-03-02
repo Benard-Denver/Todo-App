@@ -1,4 +1,4 @@
-export function TodoCard(todo) {
+export function TodoCard(todo, onDelete, onEdit) {
     //todo card
     const card = document.createElement("div");
     card.className = "todo-card";
@@ -9,6 +9,7 @@ export function TodoCard(todo) {
     topDivider.className = "top-line";
     //todo description
     const details = document.createElement("p");
+    details.className = "todo-card-description";
     details.textContent = todo.description;
     // todo status
     const todoFooter = document.createElement("span");
@@ -36,22 +37,41 @@ export function TodoCard(todo) {
     }
     todoFooter.appendChild(status);
     todoFooter.appendChild(dueDate);
+    //edit button
+    const editBtn = document.createElement("button");
+    editBtn.className = "edit-button";
+    const editImage = document.createElement("img");
+    editImage.className = "edit-button-img";
+    editImage.src = "./assets/edit.png";
+    editBtn.appendChild(editImage);
+    editBtn.addEventListener("click", () => {
+        onEdit(todo);
+    });
+    editBtn.addEventListener("mouseover", () => {
+        editBtn.style.backgroundColor = "#656ff6";
+    });
+    editBtn.addEventListener("mouseout", () => {
+        editBtn.style.backgroundColor = "yellow";
+    });
     // delete button
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "x";
-    deleteBtn.className = "delete-btn";
+    deleteBtn.className = "todo-delete-btn";
+    const deleteImg = document.createElement("img");
+    deleteImg.src = "./assets/delete.png";
+    deleteImg.className = "del-img";
+    deleteBtn.appendChild(deleteImg);
     deleteBtn.addEventListener("click", () => {
-        card.remove();
+        if (todo.id !== undefined) {
+            onDelete(todo.id);
+        }
     });
     deleteBtn.addEventListener("mouseover", () => {
-        deleteBtn.style.backgroundColor = "red";
-        deleteBtn.style.color = "white";
+        deleteBtn.style.backgroundColor = "#f6fbc4";
     });
     deleteBtn.addEventListener("mouseout", () => {
-        deleteBtn.style.backgroundColor = "#fa7070";
-        deleteBtn.style.color = "black";
+        deleteBtn.style.backgroundColor = "#ffffff";
     });
-    card.append(title, topDivider, details, bottomDivider, todoFooter, deleteBtn);
+    card.append(title, topDivider, details, bottomDivider, todoFooter, editBtn, deleteBtn);
     return card;
 }
 //# sourceMappingURL=TodoCard.js.map

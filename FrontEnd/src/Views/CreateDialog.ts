@@ -2,13 +2,31 @@ import type { Todo } from "./TodoCard";
 
 let dialog: HTMLDialogElement | null = null;
 
-export function ShowDialog(onCreate: (todo: Todo) => void) {
+export function ShowDialog(
+  onCreate: (todo: Todo) => void,
+  existingTodo?: Todo,
+) {
   if (!dialog) {
     dialog = constructDialog(onCreate);
     document.body.appendChild(dialog);
-  } else {
-    dialog.querySelector("form")?.reset(); // clear previous input
   }
+  const form = dialog.querySelector("form") as HTMLFormElement;
+  form.reset(); // clear previous input
+
+  if (existingTodo) {
+    (dialog.querySelector(".todo-title") as HTMLInputElement).value =
+      existingTodo.title;
+    (dialog.querySelector(".todo-description") as HTMLInputElement).value =
+      existingTodo.description;
+    const dateInput = dialog.querySelector(".due-date") as HTMLInputElement;
+
+    const date = new Date(existingTodo.dueDate);
+    dateInput.value = date.toISOString().split("T")[0]!;
+    dialog.setAttribute("data-edit-id", existingTodo.id!.toLocaleString());
+  } else {
+    dialog.removeAttribute("data-edit-id");
+  }
+
   dialog.showModal();
 }
 function constructDialog(onCreate: (todo: Todo) => void): HTMLDialogElement {
@@ -45,12 +63,16 @@ function constructDialog(onCreate: (todo: Todo) => void): HTMLDialogElement {
   createBtn.type = "button";
   createBtn.className = "dialog-create-btn";
   createBtn.addEventListener("click", () => {
+    const editId = createDialog.getAttribute("data-edit-id");
+
     const todo: Todo = {
+      id: editId ? Number(editId) : 0,
       title: todoTitle.value,
       description: todoDescription.value,
       dueDate: new Date(todoDueDate.value),
       status: "Not Started",
     };
+    console.log("Sending todo:", todo);
     onCreate(todo);
     createDialog.close();
   });
@@ -68,8 +90,8 @@ function constructDialog(onCreate: (todo: Todo) => void): HTMLDialogElement {
   createForm.appendChild(dialogFooter);
 
   createDialog.appendChild(createForm);
-  document.body.appendChild(createDialog);
-  createDialog.showModal();
+  // document.body.appendChild(createDialog);
+  // createDialog.showModal();
 
   return createDialog;
 }

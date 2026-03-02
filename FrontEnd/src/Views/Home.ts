@@ -1,8 +1,12 @@
-import { TodoCard } from "./TodoCard.js";
+import { TodoCard, type Todo } from "./TodoCard.js";
 import { todos } from "../App.js";
 import { TodoSiderbar } from "./Sidebar.js";
+import { ShowDialog } from "./CreateDialog.js";
 
-export function Home(): HTMLElement {
+export function Home(
+  onCreate: (todo: Todo) => void,
+  onDelete: (id: number) => void,
+): HTMLElement {
   const mainDiv = document.createElement("div");
   mainDiv.className = "main-container";
 
@@ -25,10 +29,14 @@ export function Home(): HTMLElement {
   const cardsWrapper = document.createElement("div");
   cardsWrapper.className = "cards-wrapper";
   todos.forEach((todo) => {
-    cardsWrapper.appendChild(TodoCard(todo));
+    cardsWrapper.appendChild(
+      TodoCard(todo, onDelete, (existingTodo) => {
+        ShowDialog(onCreate, existingTodo);
+      }),
+    );
   });
   container.appendChild(cardsWrapper);
-  pageContainer.appendChild(TodoSiderbar());
+  pageContainer.appendChild(TodoSiderbar(() => ShowDialog(onCreate)));
   pageContainer.appendChild(container);
   mainDiv.appendChild(pageContainer);
   return mainDiv;

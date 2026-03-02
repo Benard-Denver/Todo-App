@@ -2,7 +2,7 @@ import { todos } from "../App.js";
 import { ShowDialog } from "./CreateDialog.js";
 import { todoService } from "../App.js";
 
-export function TodoSiderbar(): HTMLElement {
+export function TodoSiderbar(onAddClick: () => void): HTMLElement {
   const sidebar = document.createElement("div");
   const addBtn = document.createElement("button");
   const homeBtn = document.createElement("button");
@@ -19,9 +19,7 @@ export function TodoSiderbar(): HTMLElement {
   addImage.className = "add-img";
   addImage.src = "./assets/plus.png";
   addBtn.appendChild(addImage);
-  addBtn.addEventListener("click", () => {
-    
-  });
+  addBtn.addEventListener("click", onAddClick);
 
   // home button
   homeBtn.textContent = "";
@@ -49,6 +47,5 @@ export function TodoSiderbar(): HTMLElement {
   sidebar.appendChild(doneBtn);
 
   document.body.appendChild(sidebar);
-  sidebar.appendChild(ShowDialog());
   return sidebar;
 }

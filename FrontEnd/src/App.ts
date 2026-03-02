@@ -1,14 +1,35 @@
 import type { Todo } from "./Views/TodoCard.js";
 import { Home } from "./Views/Home.js";
 import { TodoService } from "./Services/TodoServices.js";
+import { ShowDialog } from "./Views/CreateDialog.js";
 
 console.log("Hello World");
 
 export let todoService: TodoService = new TodoService();
 export let todos = await todoService.get();
 
+async function handleSaveClick(todo: Todo) {
+  if (todo.id && todo.id !== 0) {
+    await todoService.update(todo.id, todo);
+  } else {
+    await todoService.create(todo);
+  }
+
+  todos = await todoService.get();
+
+  app.innerHTML = "";
+  app.appendChild(Home(handleSaveClick, handleDelete));
+}
+
+async function handleDelete(id: number) {
+  await todoService.delete(id);
+  todos = await todoService.get();
+  app.innerHTML = "";
+  app.appendChild(Home(handleSaveClick, handleDelete));
+}
+
 const app = document.getElementById("app-todo")!;
-app.appendChild(Home());
+app.appendChild(Home(handleSaveClick, handleDelete));
 
 export const todos1: Todo[] = [
   {

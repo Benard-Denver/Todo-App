@@ -1,11 +1,23 @@
 let dialog = null;
-export function ShowDialog(onCreate) {
+export function ShowDialog(onCreate, existingTodo) {
     if (!dialog) {
         dialog = constructDialog(onCreate);
         document.body.appendChild(dialog);
     }
+    const form = dialog.querySelector("form");
+    form.reset(); // clear previous input
+    if (existingTodo) {
+        dialog.querySelector(".todo-title").value =
+            existingTodo.title;
+        dialog.querySelector(".todo-description").value =
+            existingTodo.description;
+        const dateInput = dialog.querySelector(".due-date");
+        const date = new Date(existingTodo.dueDate);
+        dateInput.value = date.toISOString().split("T")[0];
+        dialog.setAttribute("data-edit-id", existingTodo.id.toLocaleString());
+    }
     else {
-        dialog.querySelector("form")?.reset(); // clear previous input
+        dialog.removeAttribute("data-edit-id");
     }
     dialog.showModal();
 }
@@ -43,12 +55,15 @@ function constructDialog(onCreate) {
     createBtn.type = "button";
     createBtn.className = "dialog-create-btn";
     createBtn.addEventListener("click", () => {
+        const editId = createDialog.getAttribute("data-edit-id");
         const todo = {
+            id: editId ? Number(editId) : 0,
             title: todoTitle.value,
             description: todoDescription.value,
             dueDate: new Date(todoDueDate.value),
             status: "Not Started",
         };
+        console.log("Sending todo:", todo);
         onCreate(todo);
         createDialog.close();
     });
@@ -64,8 +79,8 @@ function constructDialog(onCreate) {
     createForm.appendChild(todoDescription);
     createForm.appendChild(dialogFooter);
     createDialog.appendChild(createForm);
-    document.body.appendChild(createDialog);
-    createDialog.showModal();
+    // document.body.appendChild(createDialog);
+    // createDialog.showModal();
     return createDialog;
 }
 //# sourceMappingURL=CreateDialog.js.map

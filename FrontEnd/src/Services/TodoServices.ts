@@ -21,4 +21,21 @@ export class TodoService {
 
     return response.json();
   }
+
+  async delete(id: number) {
+    await fetch(`${this.localHost}/todos/${id}`, {
+      method: "DELETE",
+    });
+  }
+
+  async update(id: number, todo: Todo): Promise<Number> {
+   let response = await fetch(`${this.localHost}/todos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todo),
+    });
+    return response.status;
+  }
 }

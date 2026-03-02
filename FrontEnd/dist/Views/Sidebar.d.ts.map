@@ -1,1 +1,1 @@
-{"version":3,"file":"Sidebar.d.ts","sourceRoot":"","sources":["../../src/Views/Sidebar.ts"],"names":[],"mappings":"AAIA,wBAAgB,YAAY,IAAI,WAAW,CAiD1C"}
+{"version":3,"file":"Sidebar.d.ts","sourceRoot":"","sources":["../../src/Views/Sidebar.ts"],"names":[],"mappings":"AAIA,wBAAgB,YAAY,CAAC,UAAU,EAAE,MAAM,IAAI,GAAG,WAAW,CA8ChE"}

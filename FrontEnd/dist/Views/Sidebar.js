@@ -1,7 +1,7 @@
 import { todos } from "../App.js";
 import { ShowDialog } from "./CreateDialog.js";
 import { todoService } from "../App.js";
-export function TodoSiderbar() {
+export function TodoSiderbar(onAddClick) {
     const sidebar = document.createElement("div");
     const addBtn = document.createElement("button");
     const homeBtn = document.createElement("button");
@@ -16,9 +16,7 @@ export function TodoSiderbar() {
     addImage.className = "add-img";
     addImage.src = "./assets/plus.png";
     addBtn.appendChild(addImage);
-    addBtn.addEventListener("click", () => {
-        // ShowDialog(onCreate(new Todo));
-    });
+    addBtn.addEventListener("click", onAddClick);
     // home button
     homeBtn.textContent = "";
     const homeImage = document.createElement("img");
@@ -41,7 +39,6 @@ export function TodoSiderbar() {
     sidebar.appendChild(progressBtn);
     sidebar.appendChild(doneBtn);
     document.body.appendChild(sidebar);
-    //sidebar.appendChild(createDialog);
     return sidebar;
 }
 //# sourceMappingURL=Sidebar.js.map
