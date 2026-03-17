@@ -1,13 +1,20 @@
-
 import type { Todo } from "../Models/Todo";
+import { getToken } from "./useLoginUser";
 
-export const usePutTodo = (username: string) => {
+export const usePutTodo = () => {
   const url = `https://localhost:44300/todos`;
   const updateTodo = async (todo: Todo) => {
-    const response = await fetch(`${url}/${todo.id}?username=${username}`, {
+    const token = getToken();
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+
+    const response = await fetch(`${url}/${todo.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(todo),
     });

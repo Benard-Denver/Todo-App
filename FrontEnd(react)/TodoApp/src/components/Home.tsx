@@ -20,9 +20,10 @@ import { toast } from "sonner";
 function Home() {
   const username = localStorage.getItem("todo_user") ?? "";
   const [showDialog, setDialog] = useState(false);
-  const { todos, refresh } = useGetTodos(username);
+  const { todos, refresh } = useGetTodos();
   const [search, setSearch] = useState("");
   const [user, setUser] = useState("Guest");
+
   //const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ function Home() {
 
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
 
-  const editTodo = usePutTodo(username);
+  const editTodo = usePutTodo();
   const updateTodo = async (todo: Todo) => {
     const success = await editTodo(todo);
     if (success) {
@@ -58,7 +59,7 @@ function Home() {
     }
   };
 
-  const newTodo = usePostTodo(username);
+  const newTodo = usePostTodo();
   const createTodo = async (todo: Todo) => {
     const success = await newTodo(todo);
     if (success) {

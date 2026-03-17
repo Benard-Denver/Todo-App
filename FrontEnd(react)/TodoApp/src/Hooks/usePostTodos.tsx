@@ -1,13 +1,21 @@
 import type { Todo } from "../Models/Todo";
+import { getToken } from "./useLoginUser";
 
-export const usePostTodo = (username: string) => {
+export const usePostTodo = () => {
   const url = `https://localhost:44300/todos`;
 
   const createTodo = async (todo: Omit<Todo, "id" | "username">) => {
-    const response = await fetch(`${url}?username=${username}`, {
+    const token = getToken();
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         ...todo,

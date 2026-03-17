@@ -1,5 +1,9 @@
 import type { User } from "../Models/Todo";
 
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
+
 export const useLoginUser = () => {
   return async (user: User) => {
     const response = await fetch("https://localhost:44300/users/login", {
@@ -13,6 +17,7 @@ export const useLoginUser = () => {
       console.log(data.message);
       return;
     }
+    localStorage.setItem("token", data.token);
 
     return {
       success: data.success,
