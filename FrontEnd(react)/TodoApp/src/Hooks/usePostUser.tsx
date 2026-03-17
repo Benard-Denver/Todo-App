@@ -40,6 +40,8 @@ export const usePostUser = () => {
         console.log("Failed to create user:", error);
         return false;
       }
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
 
       console.log("User created successfully");
       return true;

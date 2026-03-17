@@ -1,7 +1,7 @@
 import cancel from "../assets/images/multiply.png";
 import type { Todo } from "../Models/Todo";
 import { useState } from "react";
-import { todos } from "../Models/Todo";
+//import { todos } from "../Models/Todo";
 import { useEffect } from "react";
 
 interface DialogProps {
@@ -17,7 +17,7 @@ function Dialog({ onClose, addTodo, existingTodo, updateTodo }: DialogProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDueDate] = useState<Date>(new Date());
-  const [status, setStatus] = useState<
+  const [status] = useState<
     "Not Started" | "In Progress" | "Complete"
   >("Not Started");
 

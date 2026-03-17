@@ -32,6 +32,7 @@ function AuthPage() {
       });
       return;
     }
+    
     console.log("User login successful");
     console.log(`User: ${username}`);
     localStorage.setItem("todo_user", username);
@@ -129,6 +130,7 @@ function AuthPage() {
         </button>
       </p>
     </div>
+  
   );
 }
 

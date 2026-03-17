@@ -5,9 +5,9 @@ import App from "./App.tsx";
 import { SnackbarProvider } from "notistack";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  //<StrictMode>
     <SnackbarProvider>
       <App />
     </SnackbarProvider>
-  </StrictMode>,
+  //</StrictMode>,
 );
