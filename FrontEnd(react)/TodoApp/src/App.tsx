@@ -3,9 +3,13 @@ import "./App.css";
 import AuthPage from "./components/AuthPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
+import { useNotificationListener } from "./Hooks/useNotificationListener";
+
 
 function App() {
   //const [username, setUsername] = useState("");
+  useNotificationListener();
+
   return (
     <div className="app">
       <Toaster richColors />

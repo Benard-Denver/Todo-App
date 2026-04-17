@@ -1,8 +1,11 @@
 import cancel from "../assets/images/multiply.png";
 import type { Todo } from "../Models/Todo";
 import { useState } from "react";
-//import { todos } from "../Models/Todo";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from "react";
+import Bell from "../assets/images/notification-bell.png";
+import BlackBell from "../assets/images/black-notification.png";
 
 interface DialogProps {
   onClose: () => void;
@@ -11,29 +14,32 @@ interface DialogProps {
   existingTodo?: Todo;
 }
 
-
-
 function Dialog({ onClose, addTodo, existingTodo, updateTodo }: DialogProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDueDate] = useState<Date>(new Date());
-  const [status] = useState<
-    "Not Started" | "In Progress" | "Complete"
-  >("Not Started");
+  const [status] = useState<"Not Started" | "In Progress" | "Complete">(
+    "Not Started",
+  );
+  const [notification, setNotification] = useState<Date | null>(null);
+  const [notify, setNotify] = useState(false);
 
   useEffect(() => {
     if (existingTodo) {
       setTitle(existingTodo.title);
       setDescription(existingTodo.description);
       setDueDate(new Date(existingTodo.dueDate));
+      setNotification(existingTodo.notificationTime!);
+      setNotify(existingTodo.notify);
     }
   }, [existingTodo]);
-
   const newTodo: Omit<Todo, "id"> = {
     title,
     description,
     dueDate: date,
     status: status,
+    notificationTime: notify ? notification : null,
+    notify: notify,
   };
   const handleSubmit = async () => {
     if (!title.trim()) return;
@@ -45,6 +51,8 @@ function Dialog({ onClose, addTodo, existingTodo, updateTodo }: DialogProps) {
         description,
         dueDate: date,
         status: existingTodo.status,
+        notificationTime: notify? notification : null,
+        notify: notify
       });
     } else {
       addTodo(newTodo);
@@ -65,6 +73,21 @@ function Dialog({ onClose, addTodo, existingTodo, updateTodo }: DialogProps) {
         <button className="cancel-btn" onClick={onClose}>
           <img src={cancel} alt="cancel-icon" />
         </button>
+        <button
+          className="notify"
+          style={{
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            setNotify(!notify);
+          }}
+        >
+          {<img src={notify ? Bell : BlackBell} />}
+        </button>
+
         <hr className="top-divider" />
         <textarea
           placeholder="Description..."
@@ -76,7 +99,19 @@ function Dialog({ onClose, addTodo, existingTodo, updateTodo }: DialogProps) {
           <button className="btn-create" onClick={handleSubmit}>
             {existingTodo ? "UPDATE" : "CREATE"}
           </button>
+          {notify && <span className="notify-label">Notification:</span>}
+          {notify && (
+            <DatePicker
+              selected={notification}
+              className="dialog-date"
+              onChange={(date: Date | null) => setNotification(date)}
+              showTimeSelect
+              dateFormat="Pp"
+            />
+          )}
+          <span className="date-label">Due Date:</span>
           <input
+            placeholder="Due-Date"
             type="date"
             className="dialog-date"
             value={date ? date.toISOString().split("T")[0] : ""}

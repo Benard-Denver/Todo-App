@@ -55,6 +55,28 @@ body {
   height: 20px;
 }
 
+.user-icon button {
+  width: 40px;
+  height: 40px;
+  background-color: #e7a248;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: none;
+}
+
+.user-icon button img {
+  width: 20px;
+  height: 20px;
+}
+
+.user-icon button:active {
+  opacity: 50%;
+}
+
+.user-icon button:hover {
+  background-color: red;
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -289,6 +311,22 @@ body {
   right: 10px;
 }
 
+.notify {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 45px;
+}
+
+.notify:hover {
+  opacity: 80%;
+}
+
+.notify: :active {
+  opacity: 50%;
+}
+
 .dialog .cancel-btn:active {
   opacity: 50%;
 }
@@ -320,7 +358,20 @@ body {
 
 .dialog .dialog-footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+
+}
+
+.dialog .dialog-footer span {
+  font-size: small;
+  position: absolute;
+}
+.date-label{
+  right: 140px;
+}
+.notify-label{
+  left: 130px;
 }
 
 .dialog .btn-create {
@@ -339,6 +390,8 @@ body {
 
 .dialog .dialog-date {
   border: none;
+  max-width: 110px;
+  height: 30px;
   border-radius: 10px;
   background-color: #f8e7d1;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -4,6 +4,7 @@ import create from "../assets/images/plus.png";
 import home from "../assets/images/home.png";
 import loading from "../assets/images/loading.png";
 import done from "../assets/images/checklist.png";
+import logout from "../assets/images/logout.png";
 import Dialog from "./Dialog";
 import type { Todo } from "../Models/Todo";
 import TodoCard from "./TodoCard";
@@ -14,8 +15,17 @@ import { useDeleteTodo } from "../Hooks/useDeleteTodo";
 import { usePutTodo } from "../Hooks/usePutTodo";
 import { toast } from "sonner";
 //import { useSnackbar } from "notistack";
+import { getNotifications } from "../Hooks/getNotifications";
 
+const getNotification = async () => {
+  await getNotifications();
+};
 
+export const logoff = () => {
+  localStorage.removeItem("token");
+
+  window.location.replace("/");
+};
 
 function Home() {
   const username = localStorage.getItem("todo_user") ?? "";
@@ -25,6 +35,7 @@ function Home() {
   const [user, setUser] = useState("Guest");
 
   //const { enqueueSnackbar } = useSnackbar();
+  getNotification();
 
   useEffect(() => {
     const savedName = username;
@@ -41,7 +52,7 @@ function Home() {
       //   variant: "error",
       //   autoHideDuration: 3000,
       // });
-      toast.error("Todo Deleted")
+      toast.error("Todo Deleted");
       console.log("Todo Deleted");
       await refresh();
 
@@ -118,6 +129,9 @@ function Home() {
         <div className="user-icon">
           <span>{user}</span>
           <h3>{user.charAt(0).toUpperCase()}</h3>
+          <button onClick={logoff}>
+            <img className="logout-icon" src={logout} alt="logout icon" />
+          </button>
         </div>
 
         <div className="home-container">

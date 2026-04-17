@@ -1,21 +1,27 @@
-import { TodoService } from "../Services/TodoService";
-
 export interface Todo {
   id?: number;
   title: string;
   description: string;
   dueDate: Date;
   status: "Not Started" | "In Progress" | "Complete";
+  notificationTime?: Date;
+  notify: boolean;
 }
 
 export interface User {
   id?: number;
   username: string;
   password: string;
+  email: string;
 }
 
-export const todoService: TodoService = new TodoService();
-export const todos = await todoService.get();
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+//export const todoService: TodoService = new TodoService();
+//export const todos = await todoService.get();
 
 // export const todos1: Todo[] = [
 //   {

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 function AuthPage() {
   const [isLogin, setLogin] = useState(true);
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const createUser = usePostUser();
@@ -16,27 +17,27 @@ function AuthPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!username.trim() || !password) {
+    if (!email.trim() || !password) {
       console.log("Enter Username and Password!");
-      enqueueSnackbar("Enter Username and Password!", {
+      enqueueSnackbar("Enter Email and Password!", {
         variant: "warning",
         autoHideDuration: 3000,
       });
       return;
     }
-    const result = await login({ username, password });
+    const result = await login({ email, password });
     if (!result) {
-      enqueueSnackbar("Invalid Username or Password!", {
+      enqueueSnackbar("Invalid Email or Password!", {
         variant: "error",
         autoHideDuration: 3000,
       });
       return;
     }
-    
+
     console.log("User login successful");
-    console.log(`User: ${username}`);
-    localStorage.setItem("todo_user", username);
-    navigate("/Home", { state: { username } });
+    console.log(`User: ${result.username}`);
+    localStorage.setItem("todo_user", result.username);
+    navigate("/Home", { state: { username:result.username } });
     // enqueueSnackbar("Login Successful", {
     //   variant: "success",
     //   autoHideDuration: 3000,
@@ -46,12 +47,12 @@ function AuthPage() {
 
   const handleEnter = async (e) => {
     e.preventDefault();
-    if (!username.trim() || !password) {
-      console.log("Enter Username and Password!");
+    if (!username.trim() || !password || !email) {
+      console.log("Enter Username, Email and Password!");
       return;
     }
 
-    const result = await createUser({ username, password });
+    const result = await createUser({ username, email, password });
     if (!result) {
       console.log("Failed to create user");
       return;
@@ -71,10 +72,10 @@ function AuthPage() {
         <form className="login-form">
           <input
             type="text"
-            placeholder="Username"
-            value={username}
+            placeholder="Email"
+            value={email}
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
             }}
             required
           />
@@ -100,6 +101,15 @@ function AuthPage() {
             onChange={(e) => {
               setUsername(e.target.value);
               //setError("");
+            }}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
             }}
             required
           />
@@ -130,7 +140,6 @@ function AuthPage() {
         </button>
       </p>
     </div>
-  
   );
 }
 
